@@ -3,8 +3,10 @@ import glob
 import math
 import subprocess
 
-# 遍历当前目录下所有 .geno.txt 文件
-geno_files = glob.glob("*.geno.txt")
+# 设置输入文件的目录
+geno_dir = "/absolute/path/to/geno_dir/"
+# 遍历该目录下所有 .geno.txt 文件
+geno_files = glob.glob(os.path.join(geno_dir, "*.geno.txt"))
 
 for geno_file in geno_files:
     # 提取物种名（不带后缀）
