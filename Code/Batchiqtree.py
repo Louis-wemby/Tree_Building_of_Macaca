@@ -5,7 +5,7 @@ import subprocess
 
 def parse_args():
     parser = argparse.ArgumentParser(description="批量运行 IQ-TREE2，支持指定模型、引导次数、前缀和输出目录结构")
-    parser.add_argument("-i", "--input_dir", required=True, help="包含多个 .phylip 文件的目录")
+    parser.add_argument("-i", "--input_dir", required=True, help="包含多个 .phy 文件的目录")
     parser.add_argument("-o", "--output_dir", required=True, help="用于保存每个输入文件的IQ-TREE输出目录")
     parser.add_argument("-m", "--model", required=True, help="模型，如 GTR, HKY 等")
     parser.add_argument("-b", "--bootstrap", default="1000", help="引导次数，默认1000")
@@ -22,13 +22,13 @@ def main():
 
     os.makedirs(output_dir, exist_ok=True)
 
-    phylip_files = glob.glob(os.path.join(input_dir, "*.phylip"))
+    phylip_files = glob.glob(os.path.join(input_dir, "*.phy"))
     if not phylip_files:
-        print("No .phylip files found")
+        print("No .phy files found")
         return
 
     for phylip_file in phylip_files:
-        base_name = os.path.basename(phylip_file).replace(".phylip", "")
+        base_name = os.path.basename(phylip_file).replace(".phy", "")
         run_prefix = use_prefix + "_" + base_name if use_prefix else base_name
 
         # 每个文件对应的子目录
